@@ -13,4 +13,6 @@ jobs:
 
      
       - name: Run a multi-line script
-        run: ls
+        run: |
+          cd guacamole-client
+          ls
