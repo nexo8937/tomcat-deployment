@@ -1,4 +1,8 @@
 name: maven build
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
+  AWS_DEFAULT_REGION: us-east-1
 on:
   workflow_dispatch:
 
@@ -17,6 +21,10 @@ jobs:
           
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.5
+        
+        
+      - name: awsCLI
+        uses: unfor19/install-aws-cli-action@v1
 
       - name: git clone
         run: git clone https://github.com/apache/guacamole-client.git
@@ -27,7 +35,8 @@ jobs:
           cd guacamole-client
           mvn package
           cd guacamole/target/
-          ls 
+          aws s3 cp guacamole-1.5.2.war s3://guacamole-client/
+          aws s3 cp guacamole-1.5.2 s3://guacamole-client/
           
 
           
