@@ -6,7 +6,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: checking repo
       - uses: actions/checkout@v3
+      
+      - name: Set up JDK 8
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          
+      - name: Set up Maven
+        uses: stCarolas/setup-maven@v4.5
 
       - name: git clone
         run: git clone https://github.com/apache/guacamole-client.git
@@ -16,3 +25,7 @@ jobs:
         run: |
           cd guacamole-client
           ls
+          
+
+          
+          
