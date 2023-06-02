@@ -36,7 +36,7 @@ jobs:
           mvn package
           cd guacamole/target/
           aws s3 cp guacamole-1.5.2.war s3://guacamole-client/
-          aws s3 cp --recursive guacamole-1.5.2 s3://guacamole-client/
+          aws s3 cp --recursive guacamole-1.5.2 s3://guacamole-client/guacamole
           
 
           
