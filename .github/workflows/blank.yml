@@ -1,0 +1,16 @@
+name: maven build
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: git clone
+        run: git clone https://github.com/apache/guacamole-client.git
+
+     
+      - name: Run a multi-line script
+        run: ls
