@@ -1,4 +1,4 @@
-name: maven build
+name: building war file with maven
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
@@ -22,19 +22,20 @@ jobs:
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4.5
         
-        
       - name: awsCLI
         uses: unfor19/install-aws-cli-action@v1
 
-      - name: git clone
+      - name: clone guacamole-client repo from git
         run: git clone https://github.com/apache/guacamole-client.git
 
-     
-      - name: Run a multi-line script
+      - name: maven package
         run: |
           cd guacamole-client
           mvn package
-          cd guacamole/target/
+          
+      - name: deploying war to s3 
+        run: |
+          cd guacamole-client/guacamole/target/
           aws s3 cp guacamole-1.5.2.war s3://guacamole-client/
           aws s3 cp --recursive guacamole-1.5.2 s3://guacamole-client/guacamole
           
