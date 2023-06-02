@@ -26,7 +26,8 @@ jobs:
         run: |
           cd guacamole-client
           mvn package
-          
+          cd guacamole/target/
+          ls 
           
 
           
